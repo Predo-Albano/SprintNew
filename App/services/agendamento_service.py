@@ -2,7 +2,7 @@ from observers.subject import Subject
 from observers.admin_observer import AdminObserver
 from repositories.agendamento_repository import AgendamentoRepository
 from database import db
-from factories.agendamento_factory import AgendamentoFactory  # Importa a fábrica
+from factories.agendamento_factory import AgendamentoFactory  
 
 class AgendamentoService(Subject):
     def __init__(self):
@@ -11,14 +11,14 @@ class AgendamentoService(Subject):
         self.agendamento_repository = AgendamentoRepository(db)
 
     def criar_agendamento(self, user_id, data, servico): 
-        # Usando a AgendamentoFactory para criar o agendamento
+       
         agendamento = AgendamentoFactory.create('agendamento', user_id, data, servico)
         
-        # Validar horário (ainda pode ser feito antes de salvar, se necessário)
+        
         if not self.validar_horario_agendamento(data):
             raise ValueError("O horário escolhido está fora do intervalo permitido para agendamentos.")
         
-        # Salvando o agendamento no repositório
+       
         self.agendamento_repository.salvar(agendamento)
         
         # Notificar os observadores
