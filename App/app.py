@@ -22,7 +22,7 @@ db.init_app(app)
 app.register_blueprint(usuario_bp)
 app.register_blueprint(admin_bp, url_prefix='/admin')
 app.register_blueprint(agendamento_bp)
-app.register_blueprint(chatbot_bp)  # Registra o chatbot no Flask
+app.register_blueprint(chatbot_bp)  
 
 
 # Cria as tabelas do banco de dados (se não existirem)
@@ -35,5 +35,5 @@ def index():
     return redirect(url_for('usuario.login'))
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # Obtém a porta da variável de ambiente ou usa 5000
-    app.run(debug=True, host='0.0.0.0', port=port)  # Executa o servidor
+    port = int(os.environ.get('PORT', 5000))  
+    app.run(debug=True, host='0.0.0.0', port=port)  # Exc serv
