@@ -1,5 +1,4 @@
-# meu_app/services/servico_service.py
-from meu_app.repositories.servico_repository import ServicoRepository  # Importação correta
+from meu_app.repositories.servico_repository import ServicoRepository  
 from database import db
 
 class ServicoService:
