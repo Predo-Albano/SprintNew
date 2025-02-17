@@ -3,10 +3,10 @@ from services.agendamento_service import AgendamentoService
 import google.generativeai as genai
 import os
 
-# Configuração da API Gemini (substitua pela sua chave real)
+# Configuração da API Gemini
 GEMINI_API_KEY = "AIzaSyBg4dxUtFQc9YFaR1F-zedZ0YB0Ry-1AZs"
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-pro")  # Inicializa o modelo aqui
+model = genai.GenerativeModel("gemini-pro")  
 
 chatbot_bp = Blueprint("chatbot", __name__)
 agendamento_service = AgendamentoService()
@@ -33,16 +33,16 @@ def chatbot():
     elif "agendar" in user_message:
         resposta = "Para agendar, informe a data, horário e o serviço que deseja."
 
-    # Se nenhuma das palavras-chave for encontrada, usa o Gemini para gerar uma resposta
+    # Se nenhuma das palavras-chave , usa o Gemini para gerar uma resposta
     else:
         try:
-            # Opções de geração - ajuste conforme necessário
+           
             generation_config = {
                 "temperature": 0.7,
                 "max_output_tokens": 256
             }
             gemini_response = model.generate_content(user_message, generation_config=generation_config)
-            resposta = gemini_response.text  # Extrai o texto da resposta do Gemini
+            resposta = gemini_response.text  
         except Exception as e:
             print(f"Erro ao usar Gemini: {e}")
             resposta = "Desculpe, não entendi e não consegui gerar uma resposta usando o Gemini."
