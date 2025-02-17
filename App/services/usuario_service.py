@@ -1,5 +1,5 @@
 from repositories.usuario_repository import UsuarioRepository
-from database import db  # Importa o db DIRETAMENTE
+from database import db  
 from models import Usuario
 from werkzeug.security import generate_password_hash, check_password_hash
 
