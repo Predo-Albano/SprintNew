@@ -1,14 +1,14 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash, session
 from services.agendamento_service import AgendamentoService
 from datetime import datetime
-from models import ConfiguracaoHorario  # Importe o modelo de ConfiguracaoHorario
+from models import ConfiguracaoHorario  
 
 agendamento_bp = Blueprint('agendamento', __name__)
 
-# Função para validar se o agendamento está dentro do horário configurado pelo administrador
+#  se o agendamento está dentro do horário configurado pelo admin
 def validar_horario_agendamento(horario_agendamento):
     """Verifica se o horário do agendamento está dentro do intervalo definido pelo admin."""
-    configuracao = ConfiguracaoHorario.query.first()  # Obtemos a configuração de horário
+    configuracao = ConfiguracaoHorario.query.first()  # Obtem config hor
     if configuracao:
         hora_inicio = configuracao.hora_inicio
         hora_fim = configuracao.hora_fim
@@ -31,7 +31,7 @@ def agendamento():
         servico = request.form.get('servico')
 
         try:
-            data = datetime.strptime(data_str, '%Y-%m-%dT%H:%M')  # Converte a string para datetime
+            data = datetime.strptime(data_str, '%Y-%m-%dT%H:%M')  
 
             # Verifique se o horário está dentro do permitido
             if not validar_horario_agendamento(data):
@@ -41,7 +41,7 @@ def agendamento():
             # Criar o agendamento se for válido
             AgendamentoService().criar_agendamento(user_id, data, servico)
             flash('Agendamento efetuado com sucesso!', 'success')
-            return redirect(url_for('usuario.painel'))  # Redireciona para o painel
+            return redirect(url_for('usuario.painel'))  
         except ValueError as e:
             flash(f'Dados inválidos: {str(e)}', 'danger')
             return render_template('agendamento.html')
