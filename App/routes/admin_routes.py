@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, session, request
-from models import Agendamento, Usuario, ConfiguracaoHorario, Servico  # Importe o modelo Servico
+from models import Agendamento, Usuario, ConfiguracaoHorario, Servico  
 from database import db
 from datetime import datetime
 
@@ -23,7 +23,7 @@ def painel():
     agendamentos = Agendamento.query.all()  # Busca todos os agendamentos
     servicos = Servico.query.all()  # Busca todos os serviços
 
-    return render_template('admin_dashboard.html', agendamentos=agendamentos, servicos=servicos)  # Passa as listas para o template
+    return render_template('admin_dashboard.html', agendamentos=agendamentos, servicos=servicos)  
 
 @admin_bp.route('/configurar-horarios', methods=['GET', 'POST'])
 def configurar_horarios():
